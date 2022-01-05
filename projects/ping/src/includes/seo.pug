@@ -1,0 +1,23 @@
+- const title = 'Ping coming soon page with accessible subscription form';
+- const challenge = 'Ping coming soon page';
+- const googleFontsUrl = 'https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,300;0,600;0,700;1,300&display=swap';
+
+doctype html
+html(lang='en')
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    title #{ title } | #{ site.title }
+    meta(
+      name='description'
+      content=`A frontendmentor.io "${challenge}" challenge solution by Alex Kim`
+    )
+    meta(name='author' content='Alex Kim, https://github.com/alex-kim-dev')
+    link(rel='icon' type='image/png' sizes='32x32' href=site.favicon)
+    link(rel='preconnect' href='https://fonts.gstatic.com' crossorigin)
+    link(rel='preload' as='style' href=googleFontsUrl)
+    link(rel='stylesheet' href=googleFontsUrl)
+    link(rel='stylesheet' href='styles.scss')
+  body
+    block content
+    script(src='script.js' defer)

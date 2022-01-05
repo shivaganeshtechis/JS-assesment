@@ -1,0 +1,798 @@
+// stylelint-disable max-nesting-depth
+
+@import 'reset';
+@import 'defaults';
+
+// #region Components
+
+.logo {
+  background: url('../images/logo.svg') left center no-repeat;
+  background-size: contain;
+  height: 2.4rem;
+  width: 8rem;
+  @include sm-up {
+    height: 3rem;
+    width: 10rem;
+  }
+  @include md-up {
+    height: 4.9rem;
+    width: 16.6rem;
+  }
+}
+
+.nav {
+  &__list {
+    display: grid;
+    grid-auto-flow: column;
+    grid-gap: 2.4rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    @include sm-up {
+      grid-gap: 4rem;
+    }
+    @include md-up {
+      grid-gap: 5.6rem;
+    }
+  }
+
+  &__link {
+    color: $c-very-dark-blue;
+    font: 1.2rem Raleway, sans-serif;
+    font-kerning: none;
+    text-decoration: none;
+    @include sm-up {
+      font-size: 1.4rem;
+    }
+    @include md-up {
+      font-size: 1.6rem;
+    }
+
+    &:focus {
+      outline: 0.2rem solid $c-moderate-cyan;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.illustration {
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding-bottom: 75.46%;
+  width: 100%;
+}
+
+.heading {
+  color: $c-very-dark-blue;
+  font: 700 2.4rem/150% Raleway, sans-serif;
+  font-kerning: none;
+  margin: 0;
+  @include sm-up {
+    font-size: 3rem;
+  }
+  @include lg-up {
+    font-size: 4rem;
+  }
+}
+
+.text {
+  color: $c-very-dark-blue;
+  font: 1.4rem/150% Open Sans, sans-serif;
+  margin: 0;
+  @include sm-up {
+    font-size: 1.6rem;
+  }
+  @include lg-up {
+    font-size: 1.8rem;
+    line-height: normal;
+  }
+}
+
+.link {
+  color: inherit;
+  font: 1.6rem Open Sans, sans-serif;
+  text-decoration: none;
+
+  &:focus {
+    outline: 0.1rem solid $c-moderate-cyan;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.email-field {
+  display: block;
+
+  &__input {
+    background: $c-light;
+    border: 0.1rem solid $c-desaturated-blue;
+    border-radius: 0.3rem;
+    box-shadow: $control-shadow;
+    font: 1.2rem/140% Open Sans, sans-serif;
+    padding: 1.1rem 2.1rem;
+    transition: 0.2s;
+    width: 100%;
+    @include sm-up {
+      font-size: 1.4rem;
+      line-height: 130%;
+    }
+    @include md-up {
+      letter-spacing: 0.03em;
+      line-height: 140%;
+      padding: 1.3rem 2rem 1.1rem;
+    }
+
+    &::placeholder {
+      color: $c-light-gray;
+    }
+
+    &:focus {
+      border-color: $c-bright-blue;
+      box-shadow: $control-active-shadow;
+      outline: none;
+    }
+  }
+}
+
+.button {
+  background: $c-bright-blue;
+  border: 0;
+  border-radius: 0.3rem;
+  box-shadow: $control-shadow;
+  color: $c-light;
+  font: 700 1.4rem Raleway, sans-serif;
+  padding: 1.2rem 3.2rem;
+  transition: 0.2s;
+  @include sm-up {
+    padding-bottom: 1.3rem;
+    padding-top: 1.3rem;
+  }
+  @include sm-up {
+    padding-bottom: 1.4rem;
+    padding-top: 1.5rem;
+  }
+
+  &:focus,
+  &:hover {
+    box-shadow: $control-active-shadow;
+    filter: brightness(1.2);
+    outline: none;
+  }
+
+  &:active {
+    filter: brightness(0.8);
+  }
+}
+
+.signup-form {
+  display: grid;
+  grid-gap: 1.6rem;
+  @include md-up {
+    grid-template-columns: 2fr 1fr;
+  }
+  @include lg-up {
+    grid-template-columns: 32rem 20rem;
+  }
+}
+
+.standout-link {
+  display: inline-block;
+  text-decoration: none;
+
+  &:hover > .standout-link__underline {
+    transform: scaleY(2);
+  }
+
+  &__label {
+    color: $c-moderate-cyan;
+    font: 1.2rem Open Sans, sans-serif;
+    @include sm-up {
+      font-size: 1.4rem;
+    }
+    @include md-up {
+      font-size: 1.6rem;
+    }
+
+    &::after {
+      background: url('../images/icon-arrow.svg') center no-repeat;
+      background-size: contain;
+      content: '';
+      display: inline-block;
+      height: 1.6rem;
+      margin-left: 0.6rem;
+      vertical-align: middle;
+      width: 1.6rem;
+    }
+  }
+
+  &__underline {
+    background: $c-moderate-cyan;
+    content: '';
+    display: block;
+    height: 0.1rem;
+    margin-top: 0.4rem;
+    transition: 0.2s;
+    width: 100%;
+  }
+}
+
+.testimonials {
+  background: $c-light;
+  border-radius: 0.3rem;
+  box-shadow: 0 0.2rem 1rem hsla(0, 0%, 0%, 0.05);
+  color: $c-very-dark-blue;
+  max-width: 28rem;
+  padding: 2rem 1.2rem 2.1rem 2.6rem;
+  @include sm-up {
+    max-width: 33rem;
+  }
+  @include md-up {
+    max-width: 35.6rem;
+    padding: 2.4rem 3.2rem 2.7rem;
+  }
+
+  &__quote {
+    font: 1rem/185% Open Sans, sans-serif;
+    letter-spacing: 0.04em;
+    margin: 0;
+    @include sm-up {
+      font-size: 1.2rem;
+    }
+    @include md-up {
+      font-size: 1.4rem;
+      letter-spacing: normal;
+      line-height: 170%;
+    }
+
+    &::before {
+      background: url('../images/icon-quotes.svg') center no-repeat;
+      background-size: contain;
+      content: '';
+      display: block;
+      height: 1.2rem;
+      margin-bottom: 0.8rem;
+      width: 1.3rem;
+      @include md-up {
+        height: 1.6rem;
+        margin-bottom: 0.9rem;
+        width: 1.6rem;
+      }
+    }
+  }
+
+  &__author {
+    margin: 1.2rem 0 0;
+    @include md-up {
+      margin-top: 1.6rem;
+    }
+  }
+}
+
+.person {
+  display: grid;
+  grid-gap: 0.2rem 0.8rem;
+  grid-template:
+    'person_avatar person_name' auto
+    'person_avatar person_position' auto
+    / auto 1fr;
+
+  &__avatar {
+    border-radius: 50%;
+    grid-area: person_avatar;
+    height: 2.4rem;
+    width: 2.4rem;
+    @include sm-up {
+      height: 3.2rem;
+      width: 3.2rem;
+    }
+  }
+
+  &__name {
+    align-self: end;
+    font: 700 1rem Open Sans, sans-serif;
+    grid-area: person_name;
+    margin: 0;
+    @include md-up {
+      font-size: 1.1rem;
+      letter-spacing: 0.05em;
+    }
+  }
+
+  &__position {
+    align-self: start;
+    font: 0.6rem Open Sans, sans-serif;
+    grid-area: person_position;
+    letter-spacing: 0.05em;
+    margin: 0;
+    @include md-up {
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+    }
+  }
+}
+
+.contacts {
+  display: grid;
+  grid-gap: 1.6rem;
+  padding-left: 4rem;
+
+  [href^='tel']::before {
+    background: url('../images/icon-phone.svg') left center no-repeat;
+    background-size: contain;
+  }
+
+  [href^='mailto']::before {
+    background: url('../images/icon-email.svg') left center no-repeat;
+    background-size: contain;
+  }
+
+  &__text {
+    position: relative;
+
+    &::before {
+      content: '';
+      display: block;
+      height: 1.8rem;
+      left: -3.8rem;
+      position: absolute;
+      top: 0.3rem;
+      width: 2rem;
+    }
+  }
+}
+
+.sitemap {
+  &__list {
+    display: grid;
+    grid-gap: 1.6rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    @include sm-up {
+      grid-auto-flow: column;
+      grid-gap: 1.6rem 4rem;
+      grid-template: repeat(4, 1fr) / repeat(2, 1fr);
+    }
+    @include lg-up {
+      grid-gap: 1.6rem 14.6rem;
+    }
+
+    .sitemap__item:nth-child(5) {
+      margin-top: 3.2rem;
+      @include sm-up {
+        margin: 0;
+      }
+    }
+  }
+}
+
+.social {
+  display: grid;
+  font-size: 1rem;
+  grid-gap: 1.2em;
+  grid-template-columns: repeat(3, auto);
+  justify-content: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  &__item {
+    display: block;
+  }
+
+  &__link {
+    align-items: center;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 0.1em $c-light;
+    color: $c-light;
+    display: flex;
+    height: 2.8em;
+    justify-content: center;
+    transition: 0.2s;
+    width: 2.8em;
+    @include md-up {
+      height: 3.2em;
+      width: 3.2em;
+    }
+
+    &:focus,
+    &:hover {
+      background: $c-light;
+      color: $c-very-dark-blue;
+      outline: none;
+    }
+  }
+}
+
+.icon {
+  height: 50%;
+  width: 50%;
+}
+
+.srOnly {
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+// #endregion Components
+
+// #region Layout
+
+.header {
+  background: $c-light;
+
+  &__container {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    padding: 2.4rem;
+    @include md-up {
+      margin: 0 auto;
+      max-width: $container-lg;
+      padding: 4rem;
+    }
+    @include lg-up {
+      padding: 6.4rem 8rem;
+    }
+  }
+}
+
+.intro {
+  background: $c-light;
+
+  &__container {
+    display: grid;
+    grid-gap: 3.6rem;
+    margin: 0 auto;
+    max-width: $container-sm;
+    padding: 7.4rem 2.4rem 9rem;
+    @include md-up {
+      align-items: center;
+      grid-gap: 2.4rem;
+      grid-template-columns: repeat(2, 1fr);
+      max-width: $container-lg;
+      padding: 8rem 4rem 12rem;
+    }
+    @include lg-up {
+      grid-gap: 0;
+      padding: 2.4rem 8rem 15.4rem;
+    }
+  }
+
+  &__image {
+    padding: 0 1.2rem;
+    @include md-up {
+      padding: 0;
+    }
+
+    > .illustration {
+      background-image: url('../images/illustration-1.svg');
+    }
+  }
+
+  &__content {
+    padding: 0 0.8rem;
+    text-align: center;
+    @include md-up {
+      order: -1;
+      padding: 0;
+      text-align: left;
+    }
+    @include lg-up {
+      margin-bottom: 5.4rem;
+      padding-right: 4rem;
+    }
+  }
+
+  &__text {
+    margin-top: 2.4rem;
+    @include sm-up {
+      padding: 0 6.4rem;
+    }
+    @include md-up {
+      margin-top: 1.5rem;
+      padding: 0;
+    }
+  }
+
+  &__signup {
+    margin-top: 3.2rem;
+    @include sm-up {
+      margin-top: 2.5rem;
+      padding: 0 8rem;
+    }
+    @include md-up {
+      padding: 0;
+    }
+  }
+}
+
+.curved-top {
+  background: $c-light-grayish-blue;
+  height: 5.3rem;
+  mask: url('../images/bg-curve-mobile.svg') no-repeat center / 100% 100%;
+  position: relative;
+  width: 100%;
+  @include md-up {
+    height: 11.4rem;
+    mask-image: url('../images/bg-curve-desktop.svg');
+  }
+}
+
+.benefits {
+  background: $c-light-grayish-blue;
+
+  &__container {
+    display: grid;
+    grid-gap: 8.8rem;
+    margin: 0 auto;
+    max-width: $container-sm;
+    padding: 4rem 2.4rem 8.2rem;
+    position: relative;
+    @include md-up {
+      grid-gap: 4rem;
+      grid-template-columns: 1fr 42.34%;
+      max-width: $container-lg;
+      padding: 4rem 4rem 9rem;
+    }
+    @include lg-up {
+      grid-gap: 8rem;
+      padding: 6.4rem 8rem 10.5rem;
+    }
+  }
+
+  &__image {
+    padding: 0 0.4rem;
+    @include md-up {
+      padding: 2.4rem 0 0;
+    }
+
+    > .illustration {
+      background-image: url('../images/illustration-2.svg');
+    }
+  }
+
+  &__content {
+    @include md-up {
+      order: -1;
+    }
+  }
+
+  &__heading {
+    font-size: 1.6rem;
+    text-align: center;
+    @include sm-up {
+      font-size: 2.4rem;
+    }
+    @include md-up {
+      font-size: 3rem;
+      line-height: normal;
+      text-align: left;
+    }
+    @include lg-up {
+      font-size: 4rem;
+    }
+  }
+
+  &__text {
+    @include sm-up {
+      font-size: 1.6rem;
+      line-height: 150%;
+      max-width: 52rem;
+    }
+  }
+
+  &__text:nth-child(2) {
+    margin-top: 2.4rem;
+    @include md-up {
+      margin-top: 3.7rem;
+    }
+  }
+
+  &__text:nth-child(3) {
+    margin-top: 1.6rem;
+  }
+
+  &__link {
+    display: flex;
+    justify-content: center;
+    margin-top: 3.5rem;
+    @include md-up {
+      justify-content: flex-start;
+      margin-top: 1.6rem;
+    }
+  }
+
+  &__card {
+    margin: 4rem auto 0;
+    @include md-up {
+      margin: 4.5rem 0 0;
+    }
+  }
+}
+
+.promo {
+  background: $c-desaturated-blue;
+
+  &__container {
+    padding: 5.3rem 4.4rem 7.1rem;
+    @include md-up {
+      align-items: center;
+      display: grid;
+      grid-gap: 8rem;
+      grid-template-columns: repeat(2, 1fr);
+      margin: 0 auto;
+      max-width: $container-lg;
+      text-align: left;
+    }
+    @include lg-up {
+      grid-gap: 16rem;
+      padding: 10.2rem 8rem 8.6rem;
+    }
+  }
+
+  &__content {
+    text-align: center;
+    @include sm-up {
+      margin: 0 auto;
+      max-width: 40rem;
+    }
+    @include md-up {
+      margin: 0;
+      max-width: unset;
+      padding-right: 2rem;
+      text-align: left;
+    }
+  }
+
+  &__heading {
+    color: $c-light;
+    font-size: 1.8rem;
+    @include sm-up {
+      font-size: 2.4rem;
+    }
+    @include md-up {
+      font-size: 3.2rem;
+    }
+  }
+
+  &__text {
+    color: $c-light;
+    margin-top: 1.5rem;
+    @include md-up {
+      font-size: 1.6rem;
+      letter-spacing: 0.03em;
+      line-height: 150%;
+    }
+  }
+
+  &__signup {
+    grid-gap: 0.8rem;
+    margin: 2.4rem auto 0;
+    width: 24rem;
+    @include md-up {
+      align-content: center;
+      grid-gap: 1.6rem;
+      grid-template: repeat(2, 1fr) / auto;
+      margin: 0;
+      padding: 0 4rem;
+      width: 100%;
+    }
+
+    .email-field__input {
+      border-color: $c-light;
+      font-size: 1rem;
+      padding: 0.8rem 0.7rem;
+      @include sm-up {
+        font-size: 1.2rem;
+      }
+      @include md-up {
+        letter-spacing: normal;
+        padding: 1.5rem 2.1rem;
+      }
+
+      &:focus {
+        border-color: $c-very-dark-blue;
+      }
+    }
+
+    .button {
+      font-size: 1rem;
+      line-height: 120%;
+      padding-bottom: 1rem;
+      padding-top: 1rem;
+      @include sm-up {
+        font-size: 1.2rem;
+      }
+      @include md-up {
+        font-size: 1.4rem;
+        padding: 1.6rem 3.2rem;
+        width: 20rem;
+      }
+    }
+  }
+}
+
+.footer {
+  background: $c-very-dark-blue;
+  color: $c-light;
+
+  &__container {
+    display: grid;
+    grid-template:
+      'footer_logo' auto
+      '.' 4rem
+      'footer_contacts' auto
+      '.' 5.8rem
+      'footer_sitemap' auto
+      '.' 5.1rem
+      'footer_social' auto;
+    padding: 6.5rem 4rem 4.7rem;
+    @include sm-up {
+      grid-gap: 6rem 4rem;
+      grid-template:
+        'footer_logo footer_contacts' auto
+        'footer_sitemap footer_sitemap' auto
+        'footer_social footer_social' auto
+        / 1fr 1fr;
+      margin: 0 auto;
+      max-width: $container-sm;
+    }
+    @include md-up {
+      align-items: start;
+      grid-gap: 6rem 4rem;
+      grid-template:
+        'footer_logo footer_logo' auto
+        'footer_contacts footer_sitemap' auto
+        'footer_social footer_social' auto
+        / 3fr 4fr;
+      max-width: $container-lg;
+    }
+    @include lg-up {
+      align-items: start;
+      grid-gap: 2.4rem 11.09%;
+      grid-template:
+        'footer_logo footer_logo footer_logo' auto
+        'footer_contacts footer_sitemap footer_social' auto
+        / 23.59% 30.625% 23.59%;
+      max-width: $container-lg;
+      padding: 10.8rem 8rem 7.2rem;
+    }
+  }
+
+  &__logo {
+    background: $c-light;
+    grid-area: footer_logo;
+    height: 5.2rem;
+    mask: url('../images/logo.svg') no-repeat center / contain;
+    width: 17.6rem;
+  }
+
+  &__contacts {
+    grid-area: footer_contacts;
+  }
+
+  &__sitemap {
+    grid-area: footer_sitemap;
+  }
+
+  &__social {
+    grid-area: footer_social;
+    @include lg-up {
+      justify-self: start;
+    }
+  }
+}
+
+// #endregion Layout

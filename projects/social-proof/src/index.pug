@@ -1,0 +1,27 @@
+extends includes/seo
+
+block content
+  .wrapper
+    section.social-proof
+      .social-proof__intro
+        h1.h1= content.heading
+        p.text= content.text
+      .social-proof__ratings
+        each reviewer in content.reviewers
+          .rating
+            .stars
+            p.text-subtitle Rated 5 Stars in #{ reviewer }
+      .social-proof__testimonials
+        .grid
+          each testimonial in content.testimonials
+            - const { author, quote } = testimonial;
+            - const str = author.split(' ')[0].toLowerCase();
+            .card.grid__item
+              .person
+                img.person__avatar.avatar(
+                  src=`images/image-${str}.jpg`
+                  alt=`${author}`
+                )
+                p.person__name.text-subtitle #{ author }
+                p.person__info.text-secondary Verified Buyer
+              blockquote.quote #{ quote }

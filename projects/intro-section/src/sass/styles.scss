@@ -1,0 +1,324 @@
+@use 'sass:math';
+@import 'reset';
+
+// #region Abstracts
+
+$breakpoint-sm: 560;
+$breakpoint-md: 768;
+$breakpoint-lg: 1100;
+$breakpoint-xl: 1440;
+
+$c-violet: hsl(257, 40%, 49%);
+$c-violet-light: hsl(257, 40%, 79%);
+$c-violet-darker: hsl(257, 40%, 29%);
+$c-white: #fff;
+
+@function em($value) {
+  @if type-of($value) == 'number' {
+    @return math.div($value, 16) * 1em;
+  } @else {
+    @error 'The parameter should be of type number';
+  }
+}
+
+@function fluid-size($min, $max, $minVw, $maxVw, $unit) {
+  @return calc(
+    #{$min}#{$unit} + #{$max - $min} *
+    ((100vw - #{$minVw}#{$unit}) / #{$maxVw - $minVw})
+  );
+}
+
+@mixin sm-up {
+  @media (min-width: em($breakpoint-sm)) {
+    @content;
+  }
+}
+
+@mixin md-up {
+  @media (min-width: em($breakpoint-md)) {
+    @content;
+  }
+}
+
+@mixin lg-up {
+  @media (min-width: em($breakpoint-lg)) {
+    @content;
+  }
+}
+
+@mixin xl-up {
+  @media (min-width: em($breakpoint-xl)) {
+    @content;
+  }
+}
+
+// #endregion Abstracts
+
+// #region Base
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+body {
+  color: $c-white;
+  font-size: 1.6rem;
+}
+
+h1,
+p,
+button {
+  font-family: Poppins, san-serif;
+}
+
+p {
+  font-family: 'Open Sans', sans-serif;
+}
+
+h1 {
+  font-size: 2.4rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 150%;
+  text-transform: capitalize;
+  @include sm-up {
+    font-size: 3.2rem;
+  }
+  @include md-up {
+    font-size: 4rem;
+  }
+}
+
+p {
+  line-height: 150%;
+  @include md-up {
+    font-size: 1.8rem;
+  }
+}
+
+// #endregion Base
+
+// #region Layout
+
+.wrapper {
+  background:
+    center top / 100% no-repeat url('../images/bg-mobile.svg'),
+    $c-violet;
+  min-height: 100vh;
+  @include lg-up {
+    background-image: url('../images/bg-desktop.svg');
+    background-position: left center;
+    background-size: auto 100%;
+    height: 100vh;
+  }
+}
+
+.layout {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 54rem;
+  padding: 3.8rem 3.8rem 4rem;
+  @include md-up {
+    padding: 8rem 4rem;
+  }
+  @include lg-up {
+    display: grid;
+    grid-gap: 2.6rem 6rem;
+    grid-template:
+      'header header' auto
+      'hero content' 1fr
+      'footer footer' auto
+      / minmax(0, 69.6rem) minmax(0, 52.4rem);
+    height: 100%;
+    max-width: 128rem + 8rem * 2;
+    padding: 6.4rem 8rem 4rem;
+  }
+
+  &__header {
+    grid-area: header;
+  }
+
+  &__hero {
+    align-self: center;
+    grid-area: hero;
+    margin-top: 6.8rem;
+    @include lg-up {
+      margin-top: 0;
+    }
+    @include xl-up {
+      align-self: end;
+    }
+  }
+
+  &__content {
+    align-self: center;
+    grid-area: content;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 6.1rem;
+    max-width: 31.2rem;
+    text-align: center;
+    @include sm-up {
+      max-width: 40rem;
+    }
+    @include md-up {
+      max-width: unset;
+    }
+    @include lg-up {
+      margin-top: 0;
+      padding-bottom: 0;
+      text-align: left;
+    }
+    @include xl-up {
+      padding-bottom: 4.4rem;
+    }
+  }
+
+  &__paragraph {
+    margin-top: 1.3rem;
+    @include md-up {
+      margin-top: 2rem;
+    }
+  }
+
+  &__btn {
+    margin-top: 2.4rem;
+    width: 66.9%;
+    @include sm-up {
+      width: unset;
+    }
+  }
+
+  &__footer {
+    grid-area: footer;
+    margin-top: 6.4rem;
+    @include lg-up {
+      margin-top: 0;
+    }
+  }
+}
+
+// #endregion Layout
+
+// #region Components
+
+.logo {
+  background: center / contain no-repeat url('../images/logo.svg');
+  height: 1.9rem;
+  margin-left: 0.2rem;
+  width: 12rem;
+  @include sm-up {
+    height: 2.6rem;
+    width: 16.4rem;
+  }
+  @include md-up {
+    height: 3.2rem;
+    margin-left: 0;
+    width: 20rem;
+  }
+}
+
+.hero-image {
+  background: center / contain no-repeat url('../images/illustration-mockups.svg');
+  height: 0;
+  padding-top: 71.37%;
+  transform: scale(1.02);
+  width: 100%;
+}
+
+.btn {
+  background: $c-white;
+  border: 0;
+  border-radius: 2rem;
+  box-shadow: 0.1rem 0.3rem 0.5rem hsla(0, 0%, 0%, 0.3);
+  color: $c-violet;
+  cursor: pointer;
+  font-size: 1.3rem;
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  padding: 1.1rem 3.2rem 0.9rem;
+  transition: 0.2s;
+  @include sm-up {
+    border-radius: 2.1rem;
+    font-size: 1.5rem;
+  }
+  @include md-up {
+    border-radius: 2.8rem;
+    font-size: 1.8rem;
+    letter-spacing: normal;
+    padding: 1.3rem 6.4rem 1.6rem;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 0.3rem $c-violet-darker;
+    outline: none;
+  }
+
+  &:hover {
+    box-shadow: 0.2rem 0.4rem 0.6rem hsla(0, 0%, 0%, 0.4);
+  }
+
+  &:active {
+    background: $c-violet-light;
+  }
+}
+
+.socials {
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 1rem;
+  justify-content: center;
+  @include sm-up {
+    grid-gap: 1.6rem;
+  }
+  @include lg-up {
+    justify-content: end;
+  }
+
+  &__link {
+    align-items: center;
+    background: transparent;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 0.1rem $c-white;
+    display: flex;
+    height: 2.8rem;
+    justify-content: center;
+    transition: 0.2s ease-in-out;
+    width: 2.8rem;
+    @include sm-up {
+      height: 4rem;
+      width: 4rem;
+    }
+
+    &:focus,
+    &:hover {
+      background: $c-white;
+      outline: none;
+    }
+
+    &:focus > .socials__icon,
+    &:hover > .socials__icon {
+      color: $c-violet;
+    }
+
+    &:active {
+      background: $c-violet-light;
+    }
+  }
+
+  &__icon {
+    color: $c-white;
+    display: block;
+    height: 50%;
+    width: 50%;
+  }
+}
+
+// #endregion Components

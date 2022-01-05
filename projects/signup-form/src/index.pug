@@ -1,0 +1,25 @@
+extends includes/seo
+include includes/input
+
+block content
+  .wrapper
+    section.intro
+      header.header.text-light
+        h1.text-bold= content.heading
+        p.header_text= content.introduction
+      form.signup-form(novalidate)
+        header.signup-form__header.paper.text-light
+          h2
+            span.text-bold= content.promo[0]
+            | #{ content.promo[1] }
+        .signup-form__body.paper
+          fieldset.signup-form__fieldset
+            legend.sr-only= content.legend
+            +input({ name: 'firstName', placeholder: 'First Name' })
+            +input({ name: 'lastName', placeholder: 'Last Name' })
+            +input({ type: 'email', name: 'email', placeholder: 'Email Address' })
+            +input({ type: 'password', name: 'password', placeholder: 'Password' })
+          button.signup-form__submit.button= content.submit
+          p.signup-form__agreement.text-secondary
+            | #{ content.agreement[0] }
+            a.text-link(href='#')= content.agreement[1]

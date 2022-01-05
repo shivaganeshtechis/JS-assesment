@@ -1,0 +1,47 @@
+extends includes/seo
+
+block content
+  -
+    const format = num =>
+      num >= 10000 ? `${Math.floor(num / 1000)}k` : String(num);
+    const getLabel = num => num < 0 ? "down" : "up";
+
+  .wrapper
+    .container
+      header.header
+        .heading
+          h1.h1= content.heading
+          p.text= content.total
+        hr.separator
+        label.label.text
+          | Dark mode
+          input.sr-only(type='checkbox')
+          span.switch
+      main
+        section.summary
+          h2.sr-only= content.summary.heading
+          ul.grid
+            each record in content.summary.data
+              - const { platform, account, total, today } = record;
+              li.cell.card(data-platform=platform)
+                h3.sr-only= platform
+                p.account= account
+                strong.text-big= format(total[0])
+                p.text-secondary= total[1]
+                p.change(data-change=getLabel(today))
+                  | #{ Math.abs(today) } Today
+        section.overview
+          h2.h2= content.overview.heading
+          ul.grid
+            each record in content.overview.data
+              - const { heading, platform, stat, change } = record;
+              li.cell
+                .group
+                  h3.text
+                    | #{ heading }
+                    span.sr-only for #{ platform }
+                  .icon(data-platform=platform)
+                .group
+                  p.stat= format(stat)
+                  p.change(data-change=getLabel(change))
+                    | #{ Math.abs(change) }%

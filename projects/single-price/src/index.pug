@@ -1,0 +1,24 @@
+extends seo
+
+block content
+  - const { heading, subheading, text, subscription, benefits } = content;
+  .wrapper
+    section.offer.text-light
+      .offer__product
+        h1.text-primary= heading
+        h2.text-accent.mt-24= subheading
+        p.text-gray.mt-xs-16.mt-sm-8= text
+      .offer__subscription
+        h3= subscription.heading
+        div
+          .offer__price.mt-16
+            span= subscription.price[0]
+            span.text-muted= subscription.price[1]
+        p.text-bigger
+          | #{ subscription.text }
+        button.button.mt-24= subscription.button
+      .offer__benefits
+        h3= benefits.heading
+        ul.offer__list.text-muted.mt-16
+          each item in benefits.list
+            li= item

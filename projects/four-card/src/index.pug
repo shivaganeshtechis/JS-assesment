@@ -1,0 +1,20 @@
+extends includes/seo
+
+block content
+  .wrapper
+    section.feature
+      header.feature__header
+        .feature__heading
+          h1
+            span= content.heading[0]
+            br
+            | #{ content.heading[1] }
+        .feature__caption
+          p.text-muted= content.caption
+      dl.feature__list
+        each props in content.properties
+          - const { heading, text } = props;
+          .card
+            dt.card__heading= heading
+            dd.card__text.text-muted= text
+            .card__icon

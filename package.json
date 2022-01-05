@@ -1,0 +1,40 @@
+{
+  "name": "frontend",
+  "private": true,
+  "description": "Frontend projects for practicing with various tech",
+  "license": "MIT",
+  "repository": "git@github.com:alex-kim-dev/frontend-practice.git",
+  "author": "Alex Kim <45559664+alex-kim-dev@users.noreply.github.com>",
+  "homepage": "https://alex-kim-dev.github.io/frontend-practice/",
+  "bugs": "https://github.com/alex-kim-dev/frontend-practice/issues",
+  "scripts": {
+    "boot": "lerna bootstrap",
+    "build": "lerna run build --since $(git describe --abbrev=0 --first-parent HEAD^)",
+    "build:all": "lerna run build",
+    "bump": "lerna version --conventional-commits --conventional-graduate --no-changelog",
+    "clean:cache": "lerna run clean:cache",
+    "commit": "cz",
+    "fix": "lerna run fix --since $(git describe --abbrev=0 --first-parent HEAD^)",
+    "fix:all": "lerna run fix",
+    "lint": "lerna run lint --since $(git describe --abbrev=0 --first-parent HEAD^)",
+    "lint:all": "lerna run lint",
+    "list": "lerna ls -la",
+    "prepare": "is-ci || husky install",
+    "status": "lerna changed -a"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^16.0.1",
+    "@commitlint/config-conventional": "^16.0.0",
+    "@commitlint/config-lerna-scopes": "^16.0.0",
+    "commitizen": "^4.2.4",
+    "cz-conventional-changelog": "3.3.0",
+    "husky": "^7.0.4",
+    "is-ci": "^3.0.1",
+    "json": "^11.0.0",
+    "lerna": "^4.0.0"
+  },
+  "workspaces": [
+    "projects/*",
+    "packages/*"
+  ]
+}

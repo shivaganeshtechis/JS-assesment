@@ -1,0 +1,40 @@
+extends includes/seo
+
+block content
+  .game
+    header.header
+      h1.sr-only= title
+      img.title(src='images/logo-bonus.svg' alt=title)
+      .score
+        div Score
+        div 0
+    .content.playfield
+      .box
+        .grid
+          button.option.scissors(aria-label='Scissors')
+            span: include images/icon-scissors.svg
+          button.option.spock(aria-label='Spock')
+            span: include images/icon-spock.svg
+          button.option.paper(aria-label='Paper')
+            span: include images/icon-paper.svg
+          button.option.lizard(aria-label='Lizard')
+            span: include images/icon-lizard.svg
+          button.option.rock(aria-label='Rock')
+            span: include images/icon-rock.svg
+    .content.result.hidden
+      .col
+        .box
+        p.label You Picked
+      .col
+        .box: .placeholder
+        p.label The House Picked
+      .center
+        p.status You Lose
+        button.repeat Play Again
+    .overlay.hidden
+      section.modal
+        h2 Rules
+        img(src='images/image-rules-bonus.svg' alt='Scheme of the game rules')
+        button(aria-label='Close Rules'): include images/icon-close.svg
+    footer.footer
+      button.rules Rules

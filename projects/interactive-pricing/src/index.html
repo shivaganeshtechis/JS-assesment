@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive pricing component</title>
+    <meta
+      name="description"
+      content='A frontendmentor.io "Interactive pricing component" challenge solution by Alex Kim'
+    />
+    <meta name="author" content="<%- author %>" />
+    <link rel="icon" type="image/png" sizes="32x32" href="<%- favicon %>" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;800&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" src="/index.js"></script>
+  </head>
+  <body>
+    <main id="pricing-widget" class="container">
+      <header class="header">
+        <h1 class="heading">Simple, traffic-based pricing</h1>
+        <p class="subheading">
+          Sign-up for our 30-day trial.<br />
+          No credit card required.
+        </p>
+      </header>
+      <div class="group">
+        <div class="pricing">
+          <div class="pricing__views" aria-hidden="true">100k pageviews</div>
+          <div class="pricing__slider">
+            <div class="slider">
+              <div class="slider__bar"></div>
+              <div
+                class="slider__thumb"
+                role="slider"
+                tabindex="0"
+                aria-label="Pageviews"
+                aria-valuemin="10000"
+                aria-valuemax="1000000"
+                aria-valuenow="100000"
+                aria-valuetext="100K pageviews"
+              ></div>
+            </div>
+          </div>
+          <output class="pricing__price">
+            <strong class="pricing__value">$16.00</strong>
+            <span>/ month</span>
+          </output>
+        </div>
+        <div class="billing">
+          <label class="switch">
+            <span class="switch__left-label">monthly billing</span>
+            <input
+              type="checkbox"
+              role="switch"
+              class="switch__checkbox"
+              aria-checked="false"
+            />
+            <span class="switch__right-label">
+              yearly billing
+              <span class="chip chip--sm">-25%</span>
+              <span class="chip chip--md">25% discount</span>
+            </span>
+          </label>
+        </div>
+        <hr class="separator" />
+        <div class="bottom-group">
+          <ul class="benefits">
+            <li class="benefits__item">Unlimited websites</li>
+            <li class="benefits__item">100% data ownership</li>
+            <li class="benefits__item">Email reports</li>
+          </ul>
+          <button type="button" class="cta">Start my trial</button>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

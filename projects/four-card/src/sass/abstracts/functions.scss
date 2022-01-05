@@ -1,0 +1,9 @@
+@use 'sass:math';
+
+@function em($value) {
+  @if type-of($value) == 'number' {
+    @return math.div($value, 16) * 1em;
+  } @else {
+    @error 'The parameter should be of type number';
+  }
+}

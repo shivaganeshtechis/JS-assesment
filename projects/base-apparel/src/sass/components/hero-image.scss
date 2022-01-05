@@ -1,0 +1,21 @@
+.hero-image {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 66.67%;
+  position: relative;
+
+  @include md-up {
+    height: 100%;
+    padding-bottom: 0;
+    width: 100%;
+  }
+
+  > img {
+    height: 100%;
+    left: 0;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+}

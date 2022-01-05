@@ -1,0 +1,7 @@
+.header {
+  padding: 3.1rem 3.2rem 3.2rem;
+
+  @include md-up {
+    padding: 6.5rem 0;
+  }
+}

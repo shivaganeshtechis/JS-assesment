@@ -1,0 +1,436 @@
+@use 'sass:math';
+@import 'reset';
+
+// #region Variables
+
+$breakpoint-sm: 600;
+
+:root {
+  --bg: #fff;
+  --bg-top: #f7f9ff;
+  --text-primary: #1d1f29;
+  --text-secondary: #63687d;
+  --switch-off: #aeb3cb;
+  --switch-on: linear-gradient(225deg, #40db82 0%, #388fe7 98.02%);
+  --switch-thumb: #f1f3fa;
+  --switch-focus: #252b42;
+  --separator: #848bab;
+  --cell: #f1f3fa;
+  --cell-hover: #e1e4f0;
+  --positive: #1eb589;
+  --negative: #dc414c;
+}
+
+[theme='dark'] {
+  --bg: #1d1f29;
+  --bg-top: #20222f;
+  --text-primary: #fff;
+  --text-secondary: #8c98c6;
+  --switch-off: var(--switch-on);
+  --switch-thumb: #252b42;
+  --switch-focus: #f1f3fa;
+  --separator: #333a55;
+  --cell: #252b42;
+  --cell-hover: #333a55;
+}
+
+$platforms: (
+  ('facebook', #178ff5),
+  ('twitter', #1da1f2),
+  (
+    'instagram',
+    linear-gradient(225deg, #df4896 0%, #ee877e 50.91%, #fdc366 100%)
+  ),
+  ('youtube', #c4032b)
+);
+
+// #endregion Variables
+
+// #region Functions & Mixins
+
+@function em($value) {
+  @if type-of($value) == 'number' {
+    @return math.div($value, 16) * 1em;
+  } @else {
+    @error 'The parameter should be of type number';
+  }
+}
+
+@function fluid-font($min, $max, $minVw, $maxVw, $unit) {
+  @return calc(
+    #{$min}#{$unit} + #{$max - $min} *
+    ((100vw - #{$minVw}#{$unit}) / #{$maxVw - $minVw})
+  );
+}
+
+@mixin sm-up {
+  @media (min-width: em($breakpoint-sm)) {
+    @content;
+  }
+}
+
+// #endregion Functions & Mixins
+
+// #region Utilities
+
+.sr-only {
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+// #endregion Utilities
+
+// #region Base
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+body {
+  font-family: Inter, sans-serif;
+  font-size: 1.6rem;
+  line-height: normal;
+}
+
+// #endregion Base
+
+// #region Components
+
+.h1 {
+  color: var(--text-primary);
+  font-size: fluid-font(2.4, 2.8, 37.5, 144, rem);
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+.h2 {
+  color: var(--text-secondary);
+  font-size: 2.4rem;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+
+[theme='dark'] .h2 {
+  color: var(--text-primary);
+}
+
+.text {
+  color: var(--text-secondary);
+  font-size: 1.4rem;
+  font-weight: 700;
+  text-transform: capitalize;
+
+  &-big {
+    color: var(--text-primary);
+    font-size: 5.6rem;
+    font-weight: 700;
+    letter-spacing: -0.036em;
+    line-height: 4.8rem;
+  }
+
+  &-secondary {
+    color: var(--text-secondary);
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: 0.42em;
+    text-transform: uppercase;
+  }
+}
+
+.separator {
+  background: var(--separator);
+  border: 0;
+  height: 0.1rem;
+  margin: 2.4rem 0 1.6rem;
+  width: 100%;
+}
+
+.label {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+
+  > * + * {
+    margin-left: 1.3rem;
+  }
+}
+
+.switch {
+  background: var(--switch-off);
+  border-radius: 1.2rem;
+  cursor: pointer;
+  display: inline-block;
+  height: 2.4rem;
+  position: relative;
+  transition: 0.15s;
+  width: 4.8rem;
+
+  &::after {
+    background: var(--switch-thumb);
+    border-radius: 50%;
+    content: '';
+    height: 1.8rem;
+    left: 2.6rem;
+    position: absolute;
+    top: 0.3rem;
+    transition: left 0.25s;
+    width: 1.8rem;
+  }
+
+  &:hover {
+    background: var(--switch-on);
+  }
+}
+
+[type='checkbox'] {
+  &:focus + .switch {
+    box-shadow: 0 0 0 0.2rem var(--switch-focus);
+  }
+
+  &:checked + .switch {
+    background: var(--switch-on);
+
+    &::after {
+      left: 0.4rem;
+    }
+  }
+}
+
+.cell {
+  align-items: center;
+  background: var(--cell);
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  flex-flow: column;
+  padding: 3.2rem 3.2rem 2.4rem;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: var(--cell-hover);
+  }
+}
+
+.account {
+  align-items: center;
+  color: var(--text-secondary);
+  display: flex;
+  font-size: 1.2rem;
+  font-weight: 700;
+
+  &::before {
+    content: '';
+    height: 2rem;
+    margin-right: 0.8rem;
+    width: 2rem;
+  }
+}
+
+.change {
+  align-items: center;
+  display: flex;
+  font-size: 1.2rem;
+  font-weight: 700;
+
+  &::before {
+    content: '';
+    display: block;
+    height: 0.4rem;
+    margin-right: 0.4rem;
+    width: 0.8rem;
+  }
+
+  &[data-change='up'] {
+    color: var(--positive);
+
+    &::before {
+      background: center / contain no-repeat url('../images/icon-up.svg');
+    }
+  }
+
+  &[data-change='down'] {
+    color: var(--negative);
+
+    &::before {
+      background: center / contain no-repeat url('../images/icon-down.svg');
+    }
+  }
+}
+
+.stat {
+  color: var(--text-primary);
+  font-size: 3.2rem;
+  font-weight: 700;
+}
+
+.icon {
+  height: 2rem;
+  width: 2rem;
+}
+
+// #endregion Components
+
+// #region Layout
+
+.wrapper {
+  background: var(--bg);
+  min-height: 100vh;
+  padding: 3.6rem 2.4rem 4.5rem;
+  position: relative;
+
+  &::before {
+    background: var(--bg-top);
+    border-radius: 0 0 2rem 2rem;
+    content: '';
+    height: 23.5rem;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    @include sm-up {
+      height: 24.4rem;
+    }
+  }
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 111rem;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  flex-flow: column;
+  justify-content: space-between;
+  @include sm-up {
+    flex-flow: row;
+
+    > .separator {
+      display: none;
+    }
+  }
+
+  > .label {
+    transform: translateY(-2px);
+  }
+}
+
+.heading {
+  > * + * {
+    margin-top: 0.4rem;
+  }
+
+  > .h1 {
+    transform: translateX(-2px);
+  }
+}
+
+.summary {
+  margin-top: 4rem;
+  @include sm-up {
+    margin-top: 4.6rem;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-gap: 2.4rem;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  @include sm-up {
+    grid-gap: 3rem;
+  }
+}
+
+.card {
+  overflow: hidden;
+  position: relative;
+
+  &::before {
+    background: #808080;
+    content: '';
+    height: 0.4rem;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+
+  > .text-big {
+    margin-top: 2.8rem;
+  }
+
+  > .text-secondary {
+    margin-top: 0.9rem;
+  }
+
+  > .change {
+    margin-top: 2.5rem;
+  }
+}
+
+@each $platform, $color in $platforms {
+  .card[data-platform='#{$platform}'] {
+    &::before {
+      background: $color;
+    }
+
+    > .account::before {
+      background: center / contain no-repeat url('../images/icon-#{$platform}.svg');
+    }
+  }
+  .icon[data-platform='#{$platform}'] {
+    background: center / contain no-repeat url('../images/icon-#{$platform}.svg');
+  }
+}
+
+.overview {
+  margin-top: 4.6rem;
+
+  > .grid {
+    grid-gap: 1.6rem 2.4rem;
+    margin-top: 2.4rem;
+    @include sm-up {
+      grid-gap: 2.4rem 3rem;
+    }
+  }
+
+  .cell {
+    padding: 2.6rem 3.1rem 1.9rem 2.4rem;
+
+    > :not(:first-child) {
+      margin-top: 2.1rem;
+    }
+  }
+
+  .text {
+    transform: translateY(-2px);
+  }
+
+  .change {
+    transform: translateY(7px);
+  }
+}
+
+.group {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+// #endregion Layout

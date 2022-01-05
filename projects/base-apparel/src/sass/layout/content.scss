@@ -1,0 +1,32 @@
+.content {
+  padding: 6.4rem 3.2rem 3.2rem;
+
+  @include md-up {
+    padding: 6.5rem 0;
+  }
+
+  @include lg-up {
+    padding-right: 5.5rem;
+  }
+
+  &__heading {
+    text-transform: uppercase;
+  }
+
+  &__text {
+    color: var(--text-soft);
+    margin-top: 1.6rem;
+
+    @include sm-up {
+      margin-top: 2rem;
+    }
+  }
+
+  &__subscribe {
+    margin-top: 3.2rem;
+
+    @include sm-up {
+      margin-top: 4rem;
+    }
+  }
+}

@@ -1,0 +1,45 @@
+name: Deploy all
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy-all:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - name: Setup Nodejs
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+          cache: 'npm'
+
+      - name: Install
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint:all
+
+      - name: Build
+        run: npm run build:all
+
+      - name: Prepare for Deploy
+        run: |
+          mkdir dist
+          for D in $(ls projects); do [ -d "projects/${D}/public" ] && cp -r projects/${D}/public dist/${D}; done
+
+      - name: Update version
+        run: |
+          git config user.name "Alex Kim"
+          git config user.email "45559664+alex-kim-dev@users.noreply.github.com"
+          npm run bump -- --yes
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: gh-pages
+          folder: dist

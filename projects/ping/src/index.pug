@@ -1,0 +1,34 @@
+extends includes/seo
+include includes/social-links
+
+block content
+  .wrapper
+    header.header
+      .header__logo
+    main.content
+      h1.content__heading.text-gray
+        | We are launching #{ '' }
+        span soon!
+      p.content__paragraph Subscribe and get notified
+      .content__form
+        form.subscribe-form(novalidate)
+          div
+            label.email-field
+              span.sr-only Enter email to subscribe
+              input.email-field__input(
+                type='email'
+                name='email'
+                placeholder='Your email address...'
+                aria-describedby='feedback'
+              )
+            p#feedback.subscribe-form__feedback(
+              aria-live='polite'
+              aria-relevant='additions removals'
+              aria-atomic='true'
+            )
+          button.subscribe-form__submit.button(type='submit') Notify Me
+    .background
+    footer.footer
+      +socialLinks('socialLinks', 'socialLinks__item', 'socialLinks__link', 'icon')
+      p.footer__copyright.text-secondary.text-gray.
+        © Copyright Ping. All rights reserved.

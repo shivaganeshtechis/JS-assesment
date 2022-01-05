@@ -1,0 +1,22 @@
+$breakpoint-sm: 768;
+$breakpoint-md: 1024;
+$breakpoint-lg: 1200;
+
+:root {
+  --text-body: hsl(0, 6%, 24%);
+  --text-soft: hsl(0, 36%, 70%);
+  --text-danger: hsl(0, 93%, 68%);
+  --text-success: hsl(120, 80%, 40%);
+  --light: hsl(0, 0%, 100%);
+  --fallback: hsl(0, 95%, 95%);
+  --gradient-bg: linear-gradient(
+    135deg,
+    hsl(0, 0%, 100%),
+    hsl(0, 100%, 98%)
+  );
+  --gradient-submit: linear-gradient(
+    135deg,
+    hsl(0, 86%, 95%),
+    hsl(0, 68%, 65%)
+  );
+}

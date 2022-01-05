@@ -1,0 +1,18 @@
+mixin input({type = 'text', name, placeholder, isRequired = true } = {})
+  .field
+    label.input
+      input.input__element(
+        type=type
+        name=name
+        placeholder=placeholder
+        aria-describedby=`${name}Feedback`
+        required=isRequired ? '' : false
+      )
+      span.sr-only= placeholder
+    .field__error-icon
+    p.field__feedback(
+      id=`${name}Feedback`
+      aria-live='polite'
+      aria-relevant='additions removals'
+      aria-atomic='true'
+    )

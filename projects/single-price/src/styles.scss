@@ -1,0 +1,281 @@
+@use 'sass:math';
+@import 'reset';
+
+// #region variables
+
+$breakpoint-sm: 768;
+
+$color-primary-cyan: hsl(179, 62%, 43%);
+$color-primary-cyan-lighter: hsl(179, 47%, 52%);
+$color-primary-bright-yellow: hsl(71, 73%, 54%);
+$color-neutral-light-gray: hsl(204, 43%, 93%);
+$color-neutral-grayish-blue: hsl(218, 22%, 67%);
+$color-light: #fff;
+
+$spacing: 0.8rem;
+
+// #endregion variables
+
+// #region functions & mixins
+
+@function em($value) {
+  @if type-of($value) == 'number' {
+    @return math.div($value, 16) * 1em;
+  } @else {
+    @error 'The parameter should be of type number';
+  }
+}
+
+@mixin xs-only {
+  @media (max-width: em($breakpoint-sm - 1)) {
+    @content;
+  }
+}
+
+@mixin sm-up {
+  @media (min-width: em($breakpoint-sm)) {
+    @content;
+  }
+}
+
+// #endregion functions & mixins
+
+// #region utilities
+
+.mt {
+  &-sm-8 {
+    @include sm-up {
+      margin-top: $spacing;
+    }
+  }
+
+  &-xs-16 {
+    @include xs-only {
+      margin-top: $spacing * 2;
+    }
+  }
+
+  &-16 {
+    margin-top: $spacing * 2;
+  }
+
+  &-24 {
+    margin-top: $spacing * 3;
+  }
+
+}
+
+.text {
+  &-primary {
+    color: $color-primary-cyan;
+  }
+
+  &-accent {
+    color: $color-primary-bright-yellow;
+  }
+
+  &-light {
+    color: $color-light;
+  }
+
+  &-gray {
+    color: $color-neutral-grayish-blue;
+  }
+
+  &-muted {
+    color: $color-neutral-light-gray;
+  }
+
+  &-bigger {
+    font-size: 1.6rem;
+    line-height: 190%;
+  }
+}
+
+// #endregion utilities
+
+// #region base
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+body {
+  background-color: $color-neutral-light-gray;
+  font-size: 1.6rem;
+}
+
+button {
+  font-family: inherit;
+}
+
+// #endregion base
+
+// #region typography
+
+h1,
+h2,
+div,
+p,
+li {
+  font-family: Karla, sans-serif;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.012em;
+  line-height: 115%;
+
+  @include sm-up {
+    font-size: 2.4rem;
+    line-height: 120%;
+  }
+}
+
+h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: -0.044em;
+  line-height: 125%;
+
+  @include sm-up {
+    font-size: 1.8rem;
+    letter-spacing: -0.012em;
+    line-height: 135%;
+  }
+}
+
+h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: -0.012em;
+  line-height: 125%;
+}
+
+p {
+  font-size: 1.4rem;
+  letter-spacing: -0.012em;
+  line-height: 190%;
+
+  @include sm-up {
+    font-size: 1.6rem;
+    line-height: 165%;
+  }
+}
+
+// #endregion typography
+
+// #region layout & components
+
+.wrapper {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  padding: 7.2rem 3.2rem 7.6rem;
+}
+
+.offer {
+  border-radius: 0.4rem;
+  box-shadow: 0 2rem 2.4rem hsla(0, 0%, 0%, 0.1);
+  max-width: 40rem;
+  overflow: hidden;
+
+  @include sm-up {
+    border-radius: 0.8rem;
+    display: grid;
+    grid-template:
+      'product      product'  auto
+      'subscription benefits' auto
+      / 1fr 1fr;
+    max-width: 63.5rem;
+  }
+
+  &__product {
+    background: $color-light;
+    grid-area: product;
+    padding: 2.8rem 2.4rem 3.2rem;
+
+    @include sm-up {
+      padding: 4rem;
+    }
+  }
+
+  &__subscription,
+  &__benefits {
+    padding: 2.4rem;
+
+    @include sm-up {
+      padding: 4rem;
+    }
+  }
+
+  &__subscription {
+    background: $color-primary-cyan;
+    grid-area: subscription;
+  }
+
+  &__benefits {
+    background: $color-primary-cyan-lighter;
+    grid-area: benefits;
+  }
+
+  &__price {
+    align-items: center;
+    display: flex;
+
+    > span:first-child {
+      font-size: 3.2rem;
+      font-weight: 700;
+      line-height: 120%;
+      margin-right: 1.1rem;
+    }
+  }
+
+  &__list {
+    font-size: 1.4rem;
+    line-height: 145%;
+  }
+}
+
+.button {
+  background: $color-primary-bright-yellow;
+  border: 0.2rem solid $color-primary-bright-yellow;
+  border-radius: 0.4rem;
+  box-shadow: 0 1rem 0.8rem hsla(0, 0%, 0%, 0.1);
+  color: $color-light;
+  font-size: 1.6rem;
+  font-weight: 700;
+  padding: 1.3rem;
+  transition: all 0.2s;
+  width: 100%;
+
+  @include sm-up {
+    border-radius: 0.6rem;
+  }
+
+  &:active {
+    background: darken($color-primary-bright-yellow, 7%);
+    box-shadow: 0 0.5rem 0.4rem hsla(0, 0%, 0%, 0.1);
+  }
+
+  &:focus {
+    border: 0.2rem solid $color-light;
+    outline: none;
+  }
+
+  &:hover {
+    background: lighten($color-primary-bright-yellow, 7%);
+    box-shadow: 0 1rem 1rem hsla(0, 0%, 0%, 0.2);
+  }
+}
+
+// #endregion layout & components

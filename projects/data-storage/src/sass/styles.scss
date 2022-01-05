@@ -1,0 +1,301 @@
+@use 'sass:math';
+@import 'reset';
+
+$breakpoint-sm: 768;
+$breakpoint-md: 1024;
+
+$c-pale-blue: hsl(243, 100%, 93%);
+$c-grayish-blue: hsl(229, 7%, 55%);
+$c-dark-blue: hsl(228, 56%, 26%);
+$c-very-dark-blue: hsl(229, 57%, 11%);
+$c-peach: hsl(6, 100%, 80%);
+$c-magenta: hsl(335, 100%, 65%);
+$c-light: #fff;
+
+@function em($value) {
+  @if type-of($value) == 'number' {
+    @return math.div($value, 16) * 1em;
+  } @else {
+    @error 'The parameter should be of type number';
+  }
+}
+
+@mixin sm-up {
+  @media (min-width: em($breakpoint-sm)) {
+    @content;
+  }
+}
+
+@mixin md-up {
+  @media (min-width: em($breakpoint-md)) {
+    @content;
+  }
+}
+
+.sr-only {
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  white-space: nowrap;
+  width: 1px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+body {
+  background-color: $c-very-dark-blue;
+  color: $c-light;
+  font-size: 1.6rem;
+}
+
+label,
+div {
+  font-family: Raleway, sans-serif;
+}
+
+.wrapper {
+  align-items: center;
+  background: center / 100% 100% no-repeat url('../images/bg-mobile.svg');
+  display: flex;
+
+  justify-content: center;
+  min-height: 100vh;
+  padding: 6.4vmin;
+  @include md-up {
+    background-image: url('../images/bg-desktop.svg');
+    background-position: bottom;
+    background-size: 100% 52.5%;
+  }
+}
+
+.data-storage {
+  display: grid;
+  grid-auto-columns: minmax(0, 54rem);
+  grid-gap: 1.6rem;
+  grid-template-columns: minmax(0, 35rem);
+  @include sm-up {
+    grid-auto-flow: column;
+    grid-gap: 3rem;
+  }
+  @include md-up {
+    transform: translateY(-2.1rem);
+  }
+}
+
+.control {
+  background: $c-dark-blue;
+  border-radius: 1rem;
+  border-top-right-radius: 10rem;
+  padding: 4rem;
+
+  > .toolbar {
+    margin-top: 3.2rem;
+  }
+}
+
+.toolbar {
+  display: grid;
+  grid-auto-flow: column;
+  grid-gap: 1.6rem;
+  justify-content: start;
+
+  > li {
+    display: flex;
+  }
+}
+
+.icon-btn {
+  background-color: $c-very-dark-blue;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 0;
+  border-radius: 1rem;
+  cursor: pointer;
+  height: 4.8rem;
+  transition: 0.2s ease-in-out;
+  width: 4.8rem;
+
+  &:hover {
+    filter: brightness(1.3);
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 0.2rem $c-grayish-blue;
+    outline: none;
+  }
+
+  &:active {
+    transform: translateY(0.2rem);
+  }
+}
+
+.new-file {
+  background-image: url('../images/icon-document.svg');
+}
+
+.new-dir {
+  background-image: url('../images/icon-folder.svg');
+}
+
+.upload {
+  background-image: url('../images/icon-upload.svg');
+}
+
+.status {
+  display: grid;
+  grid-template:
+    'stats' auto
+    'badge' 1fr
+    'badge' 1fr
+    / 1fr;
+  @include sm-up {
+    grid-template:
+      'badge' 1fr
+      'badge' 1fr
+      'stats' auto
+      / 1fr;
+  }
+
+  > .stats {
+    grid-area: stats;
+    margin-top: -0.7rem;
+    text-align: center;
+    @include sm-up {
+      text-align: left;
+    }
+  }
+
+  > .badge {
+    grid-area: badge;
+  }
+}
+
+.bg {
+  background: $c-dark-blue;
+  border-radius: 1rem;
+  grid-area: 1 / 1 / span 2;
+  @include sm-up {
+    grid-row-start: 2;
+  }
+}
+
+.stats {
+  display: block;
+  padding: 3.2rem 3.2rem 1.6rem;
+  @include sm-up {
+    padding: 0 4rem 4rem;
+  }
+
+  > .meter {
+    margin-top: 1.6rem;
+  }
+}
+
+.label {
+  color: $c-light;
+  font-size: 1.4rem;
+
+  > span {
+    font-weight: 700;
+  }
+}
+
+.meter {
+  display: flex;
+  flex-flow: wrap;
+  justify-content: space-between;
+
+  > .limit {
+    margin-top: 0.8rem;
+  }
+}
+
+.bar {
+  --value: 0.815;
+  background: $c-very-dark-blue;
+  border-radius: 1rem;
+  height: 2rem;
+  padding: 0.3rem;
+  width: 100%;
+
+  > div {
+    background: linear-gradient(to right, $c-peach, $c-magenta);
+    border-radius: 0.7rem;
+    height: 100%;
+    max-width: 100%;
+    position: relative;
+    transition: width 0.5s;
+    width: calc(1.4rem + (100% - 1.4rem) * var(--value));
+
+    &::after {
+      background: $c-light;
+      border-radius: 50%;
+      content: '';
+      height: 1rem;
+      position: absolute;
+      right: 0.3rem;
+      top: 0.2rem;
+      width: 1rem;
+    }
+  }
+}
+
+.limit {
+  color: $c-light;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.badge {
+  justify-self: center;
+  @include sm-up {
+    justify-self: end;
+    margin-right: 4rem;
+
+    &::after {
+      border-left: 2.3rem solid transparent;
+      border-top: 2.3rem solid $c-light;
+      content: '';
+      display: block;
+      margin-left: auto;
+      margin-top: -0.1rem;
+      width: 0;
+    }
+  }
+
+  > div {
+    align-items: center;
+    background: $c-light;
+    border-radius: 1rem;
+    color: $c-grayish-blue;
+    display: flex;
+    font-size: 1.3rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 1.2rem 2.4rem;
+    text-transform: uppercase;
+    @include sm-up {
+      border-bottom-right-radius: 0;
+    }
+
+    > span {
+      color: $c-very-dark-blue;
+      font-size: 4rem;
+      line-height: 120%;
+      margin-right: 0.8rem;
+    }
+  }
+}

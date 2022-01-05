@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Github user search app</title>
+    <meta
+      name="description"
+      content='A frontendmentor.io "Github user search app" challenge solution by Alex Kim'
+    />
+    <meta name="author" content="<%- author %>" />
+    <link rel="icon" type="image/png" sizes="32x32" href="<%- favicon %>" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <script type="module" src="/index.js"></script>
+  </head>
+  <body data-theme="dark">
+    <main class="app-container">
+      <header class="header">
+        <h1 class="header__title">devfinder</h1>
+        <button
+          class="theme-switch"
+          type="button"
+          role="switch"
+          aria-checked="true"
+          aria-labelledby="label-theme-switch"
+        >
+          <span id="label-theme-switch" class="sr-only">Dark theme</span>
+        </button>
+      </header>
+      <form role="search" class="surface form" name="Search form">
+        <label class="text-field form__field">
+          <span class="sr-only">Github username</span>
+          <i class="icon-search text-field__icon"></i>
+          <input
+            type="text"
+            class="text-field__input"
+            name="username"
+            placeholder="Search GitHub username…"
+            aria-required="true"
+          />
+        </label>
+        <p class="form__feedback" role="alert"></p>
+        <button type="submit" class="btn form__submit">Search</button>
+      </form>
+      <article class="surface user" aria-live="polite" aria-busy="false">
+        <div class="user__avatar">
+          <img
+            src="./images/avatar-octocat.png"
+            alt="User's avatar"
+            class="avatar"
+          />
+        </div>
+        <h2 class="user__name">The Octocat</h2>
+        <p class="user__login">
+          <a href="https://github.com/octocat" class="login" target="_blank">
+            @octocat
+          </a>
+        </p>
+        <p class="user__joined">Joined 25 Jan 2011</p>
+        <p class="user__bio muted">This profile has no bio</p>
+        <dl class="user__meta meta">
+          <dt class="meta__title">Repos</dt>
+          <dd class="meta__value">8</dd>
+          <dt class="meta__title">Followers</dt>
+          <dd class="meta__value">3938</dd>
+          <dt class="meta__title">Following</dt>
+          <dd class="meta__value">9</dd>
+        </dl>
+        <ul class="user__details details">
+          <li class="details__item">San Francisco</li>
+          <li class="details__item">
+            <a
+              href="https://github.blog"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              https://github.blog
+            </a>
+            <span>Not Available</span>
+          </li>
+          <li class="details__item muted">
+            <a href="" target="_blank" rel="noopener noreferrer"></a>
+            <span>Not Available</span>
+          </li>
+          <li class="details__item">
+            <a
+              href="https://github.com/github"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              @github
+            </a>
+            <span>Not Available</span>
+          </li>
+        </ul>
+      </article>
+    </main>
+  </body>
+</html>

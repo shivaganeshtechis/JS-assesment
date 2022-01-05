@@ -1,0 +1,24 @@
+extends includes/seo
+
+block content
+  .wrapper
+    header.header
+      img.logo(src='images/logo.svg' alt='Project tracker logo')
+      nav.menu
+        input#menu-toggle.sr-only.menu__checkbox(type='checkbox')
+        label.menu__hamburger(for='menu-toggle')
+          span
+          span
+          span
+        ul.menu__list
+          each label in ['Product', 'Features', 'Pricing']
+            li: a.menu__link(href='javascript:void(0)') #{ label }
+          li.menu__separator
+          li: a.menu__link(href='javascript:void(0)') Login
+    section.intro
+      .badge New
+      h1.intro__h1 Monograph Dashboard
+      h2.intro__h2 Powerful insights into your team
+      p.intro__text Project planning and time tracking for agile teams
+      button.btn Schedule a demo
+      span.intro__label to see a preview

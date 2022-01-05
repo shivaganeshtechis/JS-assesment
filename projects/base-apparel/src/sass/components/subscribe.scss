@@ -1,0 +1,126 @@
+.subscribe {
+  --trs-time: 0.3s;
+  --round-corner-xs: 2.4rem;
+  --round-corner-sm: 2.8rem;
+
+  --factor: 1;
+  --submit-width: calc(6.67rem * var(--factor));
+  --error-icon-size: calc(1.6rem * var(--factor));
+  --error-icon-spacing: calc(1.07rem * var(--factor));
+  --email-pl: calc(2.13rem * var(--factor));
+  --email-pr: calc(var(--submit-width) + var(--error-icon-spacing));
+  --email-pr-with-error: calc(
+    var(--submit-width)
+    + var(--error-icon-size)
+    + var(--error-icon-spacing)
+    * 2
+  );
+
+  @include sm-up {
+    --factor: 1.5;
+  }
+
+  &__container {
+    position: relative;
+  }
+
+  &__email {
+    background: transparent;
+    border: 0;
+    border-radius: var(--round-corner-sm);
+    box-shadow: inset 0 0 0 0.1rem var(--text-soft);
+    font-size: 1.4rem;
+    padding: 1.7rem var(--email-pr) 1.6rem var(--email-pl);
+    transition: var(--trs-time);
+    width: 100%;
+
+    @include sm-up {
+      border-radius: var(--round-corner-sm);
+      font-size: 1.6rem;
+      padding-bottom: 2rem;
+      padding-top: 2rem;
+    }
+
+    &::placeholder {
+      color: var(--text-soft);
+    }
+
+    &:focus {
+      box-shadow: inset 0 0 0 0.2rem var(--text-soft);
+      outline: none;
+    }
+  }
+
+  &__error-icon {
+    background: url('../images/icon-error.svg') center / contain no-repeat;
+    height: var(--error-icon-size);
+    opacity: 0;
+    position: absolute;
+    right: calc(var(--submit-width) + var(--error-icon-spacing));
+    top: 50%;
+    transform: translateY(-50%);
+    transition: var(--trs-time);
+    width: 0;
+  }
+
+  &__submit {
+    background:
+      url('../images/icon-arrow.svg') center no-repeat,
+      var(--gradient-submit) center / 300% no-repeat;
+    border: 0;
+    border-radius: var(--round-corner-sm);
+    box-shadow: 0 1rem 1.4rem hsla(0, 36%, 70%, 0.5);
+    height: 100%;
+    padding: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: var(--trs-time);
+    width: var(--submit-width);
+
+    @include sm-up {
+      border-radius: var(--round-corner-sm);
+    }
+
+    &:hover,
+    &:focus {
+      background-position: center, left;
+      box-shadow: 0 1.6rem 1.4rem hsla(0, 36%, 70%, 0.5);
+      outline: none;
+    }
+
+    &:active {
+      background-position: center, right;
+      box-shadow: 0 1rem 1.4rem hsla(0, 36%, 70%, 0.5);
+    }
+  }
+
+  &__feedback {
+    color: transparent;
+    font-size: 1.3rem;
+    padding: 1.1rem var(--email-pl);
+    transition: color var(--trs-time);
+  }
+
+  &--error &__email {
+    box-shadow: inset 0 0 0 0.1rem var(--text-danger);
+    padding-right: var(--email-pr-with-error);
+
+    &:focus {
+      box-shadow: inset 0 0 0 0.2rem var(--text-danger);
+    }
+  }
+
+  &--error &__error-icon {
+    opacity: 1;
+    width: var(--error-icon-size);
+  }
+
+  &--error &__feedback {
+    color: var(--text-danger);
+  }
+
+  &--success &__feedback {
+    color: var(--text-success);
+  }
+}
